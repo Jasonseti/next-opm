@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { main_font } from "../fonts";
+import { header_font } from "../fonts";
 
 function Introduction() {
   return (
@@ -7,10 +7,10 @@ function Introduction() {
       className={clsx(
         "m-auto w-[min(65%,700px)]",
         "[&_pre]:text-wrap [&_pre]:text-[min(2.7vw,0.95em)] [&_pre]:py-[3px]",
-        `${main_font.className}`
+        `${header_font.className}`
       )}
     >
-      <h2 className="text-[max(min(3.8vw,2.2em),1.5em)] text-center">
+      <h2 className="text-xl font-semibold text-center">
         Download in PDF Format
       </h2>
     </div>

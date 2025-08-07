@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { main_font } from "../fonts";
+import { header_font, main_font } from "../fonts";
 import { text_description, brief_description } from "../variables";
 import ScrollWrapper from "./ui/scroll_wrapper";
 
@@ -7,26 +7,39 @@ function Introduction() {
   return (
     <div
       className={clsx(
-        "m-auto w-[min(65%,700px)] font-medium",
-        "[&_pre]:text-wrap [&_pre]:text-[min(2.7vw,0.95em)] [&_pre]:py-[3px]",
-        `${main_font.className}`
+        "m-auto w-[min(75%,700px)] font-medium",
+        "[&_pre]:text-wrap [&_pre]:py-[4px]",
+        `${header_font.className}`
       )}
     >
-      <h2 className="text-[max(min(3.8vw,2.2em),1.5em)] text-center mb-[3px]">
+      <h2 className="text-xl text-center mb-[5px] font-semibold">
         Read Chapters Online
       </h2>
       {text_description.map((text, i) => (
-        <pre key={i} className={`${main_font.className} hidden md:block`}>
+        <pre
+          key={i}
+          className={`${main_font.className} text-m leading-[1.55em] hidden md:block`}
+        >
           {text}
         </pre>
       ))}
       {brief_description.map((text, i) => (
-        <pre key={i} className={`${main_font.className} md:hidden`}>
+        <pre
+          key={i}
+          className={`${main_font.className} leading-[1.55em] text-m md:hidden`}
+        >
           {text}
         </pre>
       ))}
-      <pre className={`${main_font.className} text-center`}>
-        {"Note:  All chapters are sourced from and available to read for free "}
+      <pre className={`${main_font.className} text-m text-center`}>
+        <span className="md:hidden">
+          {"Note:  All chapters are originally sourced from "}
+        </span>
+        <span className="md:inline hidden">
+          {
+            "Note:  All chapters are sourced from and available to read for free "
+          }
+        </span>
         <a
           className="text-blue-900 underline"
           target="_blank"
@@ -45,10 +58,11 @@ function SearchBar() {
     <form className="w-[75%] m-auto flex flex-col">
       <input
         className={clsx(
-          "m-auto lg:ml-0 border-[1.5px] focus:border-[1.8px] rounded-[10px] w-full lg:w-[min(60%,450px)] h-[40px] pl-[3em] pr-[1em]",
+          "m-auto lg:ml-0 border-[1.5px] focus:border-[1.8px] rounded-[10px] w-full lg:w-[min(60%,450px)] h-[40px] pl-[3.5em] pr-[1em]",
           "lg:focus:w-[min(60%,800px)] transition-all duration-500 ease",
-          `${main_font.className} text-[min(3vw,1.05em)] relative leading-[100px]`
+          `${main_font.className} text-m font-medium relative leading-[100px]`
         )}
+        spellCheck="false"
         type="text"
         placeholder="Search by number, title, or description . . ."
       />
@@ -89,7 +103,7 @@ function ChapterRoll() {
 function ReadSection() {
   return (
     <section id="read" className="w-[min(100vw,1400px)] m-auto">
-      <div className="w-full pt-[min(4vw,40px)] pb-[min(6vw,50px)] m-auto no-sc">
+      <div className="w-full pt-[min(4vw,40px)] pb-[min(6vw,50px)] m-auto">
         <Introduction />
         <div className="mt-[20px] flex flex-col">
           <SearchBar />

@@ -16,3 +16,15 @@ export const faqs = {
   "Where to watch One Punch Man anime?":
     "You can watch the opm anime on various streaming services such as Netflix, Hulu, Crunchyroll, BiliBili. Currenty, the streaming service BiliBili hosted the anime for free.",
 };
+
+export const funfacts = [
+  "Tatsumaki, despite her appearance, is actually five years older than her sister Fubuki.",
+  "Despite being the number one hero, Blast is rarely seen in action, with his last major feat occurring two years before Saitama's story began.",
+  "Saitama's character design is based off of Anpanman, a children's character from an old Japanese cartoon.",
+  "Saitama's name comes from the Japanese province where his creator lives",
+  "Prior to becoming a the Caped Baldy, Saitama had part time jobs as a construction worker and a convenience store clerk. One of Saitama's experiences while working at a store was depicted in a picture diary that used to live on the creator's website.",
+  "The Hero Association was started by Saitama because he saves the grandson of Agoni, the multi-millionaire who then founded the Hero Association.",
+  "Garou is wearing a different style of clothing in the webcomic. While he is known for his martial arts getup in the manga, in the original webcomic he is wearing regular sneakers and jeans, even as a monster.",
+  "According to ONE, although Saitama is bald, he has hair everywhere else on his body.",
+  "Genos can sleep because he has a ‘sleep mode.’",
+];
