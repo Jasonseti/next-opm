@@ -1,10 +1,11 @@
+import { ThemeProvider } from "./theme_provider";
 import type { Metadata } from "next";
-import ThemeProvider from "./theme_context";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OPM-PDF",
-  description: "one punch man manga in pdf format",
+  title: "One Punch Man PDF",
+  description:
+    "Read One Punch Man Online. Download One Punch Man in PDF Format. Get One Punch Man Source Files.",
 };
 
 export default function RootLayout({
@@ -14,6 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta property="og:image:alt" content="One Punch Man PDF" />
+      </head>
       <ThemeProvider>{children}</ThemeProvider>
     </html>
   );
