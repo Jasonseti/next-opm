@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --background: #efefef;
+  --background-dark: #1f1f1f;
+  --color: #1c1b1b;
+  --color-dark: #f3f3f3;
+  --color-news: #c62c41;
+  --red-bg: #de354b;
+
+  --animate-wiggle: wiggle 0.5s ease-in-out 1;
+  @keyframes wiggle {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 100;
+    }
+  }
+}
+
+@layer components {
+  .text-xxl {
+    @apply !text-[max(min(5.5vw,4em),2em)];
+  }
+  .text-xl {
+    @apply !text-[max(min(5vw,2.5em),2em)];
+  }
+  .text-l {
+    @apply !text-[max(min(3.2vw,1.8em),1.4em)];
+  }
+  .text-m {
+    @apply !text-[max(min(2.1vw,1.2em),1em)];
+  }
+  .text-s {
+    @apply !text-[max(min(1.6vw,0.9em),0.7em)];
+  }
+}
+.prev-next-button {
+  @apply cursor-pointer rounded-[10px] bg-orange-300 px-[20px] py-[6px] text-black;
+}
+.bg-transition {
+  @apply transition-all duration-75 ease-in;
+}
+
+.dark {
+  background: var(--background-dark);
+  color: var(--color-dark);
+}
+html {
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+  background: var(--background);
+  color: var(--color);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+  background-color: rgb(220, 220, 220);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: gray;
+}
+input[type="range"] {
+  -webkit-appearance: rounded !important;
+  background: red;
+  height: 7px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  background: blue;
+  height: 10px;
+  width: 10px;
+}
+.custom-navigator-scrollbar::-webkit-scrollbar {
+  height: min(1.5vw, 15px);
+  border-radius: 10px;
+  background-color: rgb(70, 70, 70);
+}
+.custom-navigator-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: rgb(225, 225, 225);
+  border: 1px solid black;
+}
+.custom-comment-scrollbar::-webkit-scrollbar {
+  height: 4px;
+  border-radius: 10px;
+  background-color: rgb(220, 220, 220);
+}
+.custom-comment-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: gray;
+}
+.animate-fader {
+  animation-name: fade;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

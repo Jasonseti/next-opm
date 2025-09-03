@@ -1,0 +1,11 @@
+5. Finalize source format
+
+1. Insert ChapterList component in reader
+2. Slider/Instant reader
+3. Edit Comments
+4. CaptchaV2/GoogleAds
+5. Search chapters by description
+6. Mobile Version (!)
+
+
+
