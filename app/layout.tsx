@@ -1,4 +1,4 @@
-import { ThemeProvider } from "./theme_provider";
+import { ThemeProvider } from "./theme-provider";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import "./globals.css";

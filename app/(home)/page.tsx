@@ -1,12 +1,11 @@
-import HeroSection from "./components/HeroSection";
-import NewsSection from "./components/NewsSection";
-
-import ReadSection from "./components/ReadSection";
-import FunFact from "./components/FunFact";
-
-import DownloadSection from "./components/DownloadSection";
-import Appendix from "./components/FAQ+Ads";
-import Footer from "./components/Footer";
+import HeroSection from "./components/hero-section/hero-section";
+import NewsSection from "./components/news-section/news-section";
+import ThemeSwitch from "./components/theme-switch";
+import ReadSection from "./components/read-section/read-section";
+import FunFact from "./components/fun-fact/fun-fact";
+import DownloadSection from "./components/download-section/download-section";
+import PostScript from "./components/postscript/postscript";
+import Footer from "./components/footer-section/footer-section";
 
 import { cookies } from "next/headers";
 
@@ -24,17 +23,17 @@ export default async function HomePage(props: {
   );
 
   return (
-    <div className="overflow-hidden">
+    <main className="overflow-hidden text-[2vw] sm:text-[1.5vw] lg:text-[min(1.2vw,12px)]">
       <HeroSection />
       <NewsSection />
 
-      <div className="h-[min(6vw,60px)]"></div>
+      <ThemeSwitch />
       <ReadSection query={query} bookmark_list={bookmark_list} />
       <FunFact />
-      <DownloadSection />
 
-      <Appendix />
+      <DownloadSection />
+      <PostScript />
       <Footer />
-    </div>
+    </main>
   );
 }

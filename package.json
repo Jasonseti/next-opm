@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node -r dotenv/config ./lib/sources/seed.js"
+    "seed": "node -r dotenv/config ./app/lib/seed.js"
   },
   "dependencies": {
     "@base-ui-components/react": "^1.0.0-beta.2",
