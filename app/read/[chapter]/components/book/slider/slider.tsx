@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import { useState, useEffect, useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { StatesTypes, StatesContext } from "../../../state-provider";
 import SlideWrapper from "./slide-wrapper";
 import ImageBlock from "../image-block";
@@ -20,26 +20,24 @@ export default function Slider({
     states.page_mode.state.toLowerCase() === "two-page";
   const two_page_map = useMemo(() => {
     const two_page_map: number[] = [];
-    two_page_layouts.reduce(
-      (total, pages) => {
-        if (pages.length === 1) {
-          two_page_map.push(total);
-          total = total + 1;
-        } else {
-          two_page_map.push(total);
-          total = total + 2;
-        }
-        return total;
-      },
-      states.chapter_list.includes(states.chapter) ? 1 : 1.5
-    );
+    two_page_layouts.reduce((total, pages) => {
+      if (pages.length === 1) {
+        two_page_map.push(total);
+        total = total + 1;
+      } else {
+        two_page_map.push(total);
+        total =
+          total + pages.reduce((tot, p) => tot + Number(p > -1 ? 1 : 0), 0);
+      }
+      return total;
+    }, 1);
     return two_page_map;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [two_page_layouts]);
-  const [page_height, setPageHeight] = useState<number>(0);
-  useEffect(
-    () => setPageHeight(0.9 * window.innerHeight),
-    [states.page_mode.state]
+
+  const page_height = useMemo(
+    () => 0.9 * window.innerHeight,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [states.page_mode.state, states.read_mode.state]
   );
 
   return (
@@ -68,6 +66,12 @@ export default function Slider({
             </div>
           </div>
         ))}
+        <div
+          style={{ width: window.innerWidth }}
+          className="py-[5vh] h-[100vh] relative flex"
+        >
+          <Reception />
+        </div>
       </div>
 
       <div className={clsx(is_two_page ? "block" : "hidden", "relative flex")}>
@@ -78,39 +82,47 @@ export default function Slider({
             style={{ width: window.innerWidth }}
             className={clsx(
               "h-[100vh] flex justify-center px-[7.5vw] py-[5vh]",
-              "flex-row-reverse last-of-type:flex-row"
+              "flex-row-reverse nth-last-of-type-[2]:flex-row"
             )}
           >
-            {indexes.map((index, j) => (
-              <>
-                {index > -1 && (
-                  <div
-                    key={j}
-                    style={{
-                      width:
-                        (page_height * image_dimensions[index][0]) /
-                        image_dimensions[index][1],
-                      height: page_height,
-                    }}
-                    className={clsx(
-                      "relative overflow-hidden",
-                      "first-of-type:rounded-r-[min(0.5vw,5px)] last-of-type:rounded-l-[min(0.5vw,5px)]"
-                    )}
-                  >
-                    <ImageBlock
-                      image_url={image_urls[index]}
-                      image_dimension={image_dimensions[index]}
-                    />
-                  </div>
-                )}
-              </>
-            ))}
+            {indexes.map((index, j) =>
+              index > -1 ? (
+                <div
+                  key={j}
+                  style={{
+                    width:
+                      (page_height * image_dimensions[index][0]) /
+                      image_dimensions[index][1],
+                    height: page_height,
+                  }}
+                  className={clsx(
+                    "relative overflow-hidden my-auto",
+                    "first-of-type:rounded-r-[min(0.5vw,5px)] last-of-type:rounded-l-[min(0.5vw,5px)]"
+                  )}
+                >
+                  <ImageBlock
+                    image_url={image_urls[index]}
+                    image_dimension={image_dimensions[index]}
+                  />
+                </div>
+              ) : (
+                <div
+                  key={j}
+                  style={{
+                    width: page_height / 1.5,
+                    height: page_height,
+                  }}
+                ></div>
+              )
+            )}
           </div>
         ))}
-      </div>
-
-      <div className="w-[100vw] h-[100vh] flex py-[5vh]">
-        <Reception />
+        <div
+          style={{ width: window.innerWidth }}
+          className="py-[5vh] h-[100vh] relative flex"
+        >
+          <Reception />
+        </div>
       </div>
     </SlideWrapper>
   );

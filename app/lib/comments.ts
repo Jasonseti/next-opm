@@ -47,7 +47,41 @@ export async function insertComment(chapter: string, formData: FormData) {
     });
   } catch (e) {
     console.error(e);
-    return [];
+  }
+}
+
+export async function EditComment(
+  chapter: string,
+  uuid: string,
+  updated_comment: string
+) {
+  try {
+    if (!updated_comment) return;
+
+    await client.connect();
+    const db = client.db("comments").collection("chapter_" + chapter);
+
+    await db.updateOne(
+      { _id: new ObjectId(uuid) },
+      { $set: { comment: updated_comment } }
+    );
+
+    revalidatePath("/read/chapter_" + chapter);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function deleteComment(chapter: string, uuid: string) {
+  try {
+    await client.connect();
+    const db = client.db("comments").collection("chapter_" + chapter);
+
+    await db.deleteOne({ _id: new ObjectId(uuid) });
+
+    revalidatePath("/read/chapter_" + chapter);
+  } catch (e) {
+    console.error(e);
   }
 }
 
@@ -68,20 +102,5 @@ export async function likeComment(
     );
   } catch (e) {
     console.error(e);
-    return [];
-  }
-}
-
-export async function deleteComment(chapter: string, uuid: string) {
-  try {
-    await client.connect();
-    const db = client.db("comments").collection("chapter_" + chapter);
-
-    await db.deleteOne({ _id: new ObjectId(uuid) });
-
-    revalidatePath("/read/chapter_" + chapter);
-  } catch (e) {
-    console.error(e);
-    return [];
   }
 }

@@ -16,8 +16,8 @@ export default function Reception() {
 
   return (
     <div
-      id="reception_page"
       className={clsx(
+        "reception_page",
         "h-[90%] aspect-[2/3] flex flex-col m-auto border-b-[3px] border-red-400",
         `${main_font.className} font-semibold text-[1.5em]`
       )}

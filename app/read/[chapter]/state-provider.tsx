@@ -1,6 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useState, createContext, Dispatch, SetStateAction } from "react";
+// import { deleteAllCookies } from "../../lib/cookies";
 
 export interface StatesTypes {
   chapter: string;
@@ -8,6 +9,7 @@ export interface StatesTypes {
   chapter_index: number;
   cover_chapters: string[];
   next_chapter_thumbnail: string;
+  liked_id_list: string[];
   current_page: {
     state: number;
     setState: Dispatch<SetStateAction<number>>;
@@ -48,6 +50,7 @@ export const StatesContext = createContext<StatesTypes>({
   chapter_index: 0,
   cover_chapters: [],
   next_chapter_thumbnail: "",
+  liked_id_list: [],
   current_page: {
     state: 0,
     setState: () => {},
@@ -94,6 +97,7 @@ export default function StateProvider({
     chapter_index: number;
     cover_chapters: string[];
     next_chapter_thumbnail: string;
+    liked_id_list: string[];
   };
   cookies: {
     page_mode?: string;
@@ -129,6 +133,7 @@ export default function StateProvider({
     chapter_index: props.chapter_index,
     cover_chapters: props.cover_chapters,
     next_chapter_thumbnail: props.next_chapter_thumbnail,
+    liked_id_list: props.liked_id_list,
     current_page: { state: current_page, setState: setCurrentPage },
     page_mode: { state: page_mode, setState: setPage },
     read_mode: { state: read_mode, setState: setMode },
@@ -138,6 +143,8 @@ export default function StateProvider({
     is_comment_open: { state: is_comment_open, setState: setCommentOpen },
     messages: { state: messages, setState: setMessages },
   };
+
+  // deleteAllCookies();
   return (
     <StatesContext.Provider value={states}>{children}</StatesContext.Provider>
   );

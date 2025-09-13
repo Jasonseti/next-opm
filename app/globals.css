@@ -11,23 +11,6 @@
   --primary-yellow: #ffb703;
 }
 
-@layer components {
-  .text-xxl {
-    @apply !text-[max(min(5.5vw,4em),2em)];
-  }
-  .text-xl {
-    @apply !text-[max(min(5vw,2.5em),2em)];
-  }
-  .text-l {
-    @apply !text-[max(min(3.2vw,1.8em),1.4em)];
-  }
-  .text-m {
-    @apply !text-[max(min(2.1vw,1.2em),1em)];
-  }
-  .text-s {
-    @apply !text-[max(min(1.6vw,0.9em),0.7em)];
-  }
-}
 .prev-next-button {
   @apply cursor-pointer rounded-[10px] bg-orange-300 px-[20px] py-[6px] text-black;
 }
@@ -62,22 +45,11 @@ html {
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
   border-radius: 10px;
-  background-color: rgb(220, 220, 220);
+  background-color: gray;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 6px;
-  background-color: gray;
-}
-input[type="range"] {
-  -webkit-appearance: rounded !important;
-  background: red;
-  height: 7px;
-}
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  background: blue;
-  height: 10px;
-  width: 10px;
+  background-color: rgb(220, 220, 220);
 }
 .custom-navigator-scrollbar::-webkit-scrollbar {
   height: min(1.5vw, 15px);
@@ -89,12 +61,6 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: rgb(225, 225, 225);
   border: 1px solid black;
 }
-.custom-comment-scrollbar::-webkit-scrollbar {
-  height: 4px;
-  border-radius: 10px;
-  background-color: rgb(220, 220, 220);
-}
-.custom-comment-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 6px;
-  background-color: gray;
+.left-scrollbar {
+  direction: rtl;
 }

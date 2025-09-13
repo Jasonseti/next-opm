@@ -23,7 +23,7 @@ export default function Book({
     const two_page_ratios: number[] = [];
     let placeholder: number[] = [];
     if (!states.cover_chapters.some((chp) => chp === states.chapter))
-      placeholder[0] = -1;
+      placeholder[0] = -2;
     for (let i = 0; i < image_urls.length; i++) {
       if (image_dimensions[i][0] > image_dimensions[i][1]) {
         two_page_layouts.push([i]);
@@ -45,7 +45,7 @@ export default function Book({
     <>
       <section
         id="book_section"
-        className="w-[100vw] h-[100vh] bg-[var(--primary-blue)]"
+        className="w-[100vw] h-[100vh] bg-[var(--primary-blue)] overflow-x-hidden"
       >
         <section className={clsx(read_mode === "scroll" ? "flex" : "hidden")}>
           <Scroller
@@ -64,15 +64,6 @@ export default function Book({
             two_page_layouts={two_page_layouts}
           />
         </section>
-
-        {/* <div
-        className={clsx(
-          states.read_mode.state.toLowerCase() === "slide"
-            ? "block"
-            : "hidden",
-          "w-full h-full"
-        )}
-      ></div> */}
       </section>
       <Feedback />
     </>

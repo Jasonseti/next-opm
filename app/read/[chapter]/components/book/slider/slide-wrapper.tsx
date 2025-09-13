@@ -88,7 +88,7 @@ export default function SlideWrapper({
         className="relative flex transition-all duration-300"
       >
         {/* Debugging Purposes */}
-        <div className="fixed left-0 text-white z-50">{slide_page}</div>
+        {/* <div className="fixed left-0 text-white z-50">{slide_page}</div> */}
         {children}
       </div>
     </section>

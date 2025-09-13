@@ -14,7 +14,7 @@ export default function ReadSection({
   bookmark_list,
 }: {
   query: string;
-  bookmark_list: boolean[];
+  bookmark_list: string[];
 }) {
   return (
     <section
@@ -123,9 +123,11 @@ async function ChapterList({
   bookmark_list,
 }: {
   query: string;
-  bookmark_list: boolean[];
+  bookmark_list: string[];
 }) {
   const chapters = await fetchChaptersList(query);
+  if (chapters.length === 0) return <NoChapterList />;
+  if (!query) chapters.reverse();
   const calcSize = (str: string) =>
     str.length > 15 ? 1.0 - str.length * 0.004 : 1.0;
 
@@ -171,7 +173,7 @@ async function ChapterList({
 
           <div
             className={clsx(
-              bookmark_list[i] ? "block" : "hidden",
+              bookmark_list.includes(chapter.chapter) ? "block" : "hidden",
               "h-[20%] w-[20%] absolute inset-[4%]",
               "bg-white rounded-[10%]"
             )}
@@ -221,19 +223,25 @@ async function ChapterList({
 }
 
 function ChapterListSkeleton() {
+  return Array.from(Array(10)).map((_, i: number) => (
+    <div
+      key={i}
+      className={clsx(
+        "w-[30vw] sm:w-[25vw] md:w-[min(20vw,200px)] aspect-[2/3]",
+        "mx-[min(0.5vw,5px)] first-of-type:ml-0 last-of-type:mr-0",
+        "border-[1.5px] border-gray-600 rounded-[5px] overflow-hidden",
+        "bg-gray-400 animate-pulse"
+      )}
+    ></div>
+  ));
+}
+
+function NoChapterList() {
   return (
-    <>
-      {Array.from(Array(10)).map((_, i: number) => (
-        <div
-          key={i}
-          className={clsx(
-            "w-[30vw] sm:w-[25vw] md:w-[min(20vw,200px)] aspect-[2/3]",
-            "mx-[min(0.5vw,5px)] first-of-type:ml-0 last-of-type:mr-0",
-            "border-[1.5px] border-gray-600 rounded-[5px] overflow-hidden",
-            "bg-gray-400 animate-pulse"
-          )}
-        ></div>
-      ))}
-    </>
+    <div className="flex w-[min(90vw,1400px)] h-[calc(min(20vw,200px)*1.5)] border-[1.5px] rounded-[min(2vw,20px)]">
+      <p className="m-auto font-semibold text-[1.5em] italic">
+        No Results Found . . .
+      </p>
+    </div>
   );
 }

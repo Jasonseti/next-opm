@@ -68,9 +68,9 @@ export default function ScrollWrapper({
       ref={scroll_wrapper}
       className="w-[100vw] h-[100vh] overflow-y-scroll no-scrollbar flex"
     >
-      <div className="fixed top-0 text-white z-50">
+      {/* <div className="fixed top-0 text-white z-50">
         {states.current_page.state}
-      </div>
+      </div> */}
       <div className="pt-[50px] pb-[150px] m-auto">{children}</div>
       <aside>
         <div
@@ -84,7 +84,7 @@ export default function ScrollWrapper({
               });
           }}
           className={clsx(
-            "fixed z-10 bottom-[18%] right-[8%] text-white",
+            "fixed bottom-[18%] right-[8%] text-white",
             "bg-white rounded-[20%] w-[60px] aspect-square border-[2px] border-black",
             is_scrolling_up ? "opacity-85" : "opacity-0 pointer-events-none",
             "transition duration-200 cursor-pointer select-none"

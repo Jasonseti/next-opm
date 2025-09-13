@@ -44,7 +44,7 @@ export default function ScrollWrapper({
       <div ref={parent_element} className="flex overflow-x-scroll no-scrollbar">
         <div
           ref={scroll_wrapper}
-          className="relative flex flex-row-reverse transition-all duration-400 ease-out"
+          className="relative flex flex-row transition-all duration-400 ease-out"
           style={{ left: left_scroll + "px" }}
         >
           {children}

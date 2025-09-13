@@ -10,10 +10,15 @@ export function HeaderDrawer({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       const book_element = document.getElementById("book_section");
-      const reception_page = document.getElementById("reception_page");
+      const reception_page = Array.from(
+        document.getElementsByClassName("reception_page")
+      );
       if (
         reception_page &&
-        reception_page.contains(event.target as HTMLElement)
+        reception_page.reduce(
+          (bool, page) => bool || page.contains(event.target as HTMLElement),
+          false
+        )
       )
         return;
       if (book_element && book_element.contains(event.target as HTMLElement)) {
@@ -29,9 +34,9 @@ export function HeaderDrawer({ children }: { children: React.ReactNode }) {
   return (
     <section
       className={clsx(
-        "flex",
+        "sm:flex hidden",
         "absolute w-[min(90vw,1000px)] aspect-[3/1] inset-0 mx-auto z-20",
-        "shadow-[12px_12px_25px_0px_rgba(0,_0,_0,_0.5)]",
+        "shadow-[12px_12px_24px_0px_rgba(0,_0,_0,_0.5)]",
         "bg-[var(--background)] rounded-b-[10px]",
         !states.is_header_open.state && "-translate-y-1/1",
         "transition duration-400 ease-in-out"
@@ -50,18 +55,45 @@ export function HeaderDrawer({ children }: { children: React.ReactNode }) {
   );
 }
 
-// export function MobileDrawer({ children }: { children: React.ReactNode }) {
-//   const settings: ContextType = useContext(SettingsContext);
+export function MobileDrawer({ children }: { children: React.ReactNode }) {
+  const states: StatesTypes = useContext(StatesContext);
 
-//   return (
-//     <div
-//       className={clsx(
-//         "absolute z-20 top-[5%]",
-//         !settings.is_header_open.state && "-translate-x-1/1",
-//         "transition duration-500 ease-in-out"
-//       )}
-//     >
-//       {children}
-//     </div>
-//   );
-// }
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const book_element = document.getElementById("book_section");
+      const reception_page = Array.from(
+        document.getElementsByClassName("reception_page")
+      );
+      if (
+        reception_page &&
+        reception_page.reduce(
+          (bool, page) => bool || page.contains(event.target as HTMLElement),
+          false
+        )
+      )
+        return;
+      if (book_element && book_element.contains(event.target as HTMLElement)) {
+        states.is_header_open.setState(!states.is_header_open.state);
+      }
+    };
+
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [states.is_header_open.state]);
+
+  return (
+    <div
+      className={clsx(
+        "sm:hidden bg-white pl-[2vw] pr-[1vw] scale-[110%] origin-right",
+        "shadow-[-12px_12px_24px_0px_rgba(0,_0,_0,_0.5)]",
+        "rounded-l-[20px] text-[2vw]",
+        "absolute w-[55vw] h-[530px] z-20 top-[10vh] right-0",
+        !states.is_header_open.state && "translate-x-1/1",
+        "transition duration-400 ease-in-out"
+      )}
+    >
+      {children}
+    </div>
+  );
+}

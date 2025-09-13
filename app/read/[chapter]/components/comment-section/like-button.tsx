@@ -1,40 +1,39 @@
 "use client";
 import clsx from "clsx";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
+import { StatesTypes, StatesContext } from "../../state-provider";
 import { likeComment } from "../../../../lib/comments";
 import { setIDCookies } from "../../../../lib/cookies";
 
 export default function LikeButton({
-  chapter,
-  uuid,
+  _id,
   likes,
-  liked,
 }: {
-  chapter: string;
-  uuid: string;
+  _id: string;
   likes: number;
-  liked: boolean;
 }) {
+  const states: StatesTypes = useContext(StatesContext);
+  const liked = states.liked_id_list.includes(_id);
   const current_likes = useRef<number>(liked ? likes - 1 : likes);
   const [is_liked, setLiked] = useState<boolean>(liked);
 
   return (
     <button
       onClick={async () => {
-        await likeComment(chapter, uuid, !is_liked);
-        setIDCookies("liked_id_list", uuid, !is_liked);
+        await likeComment(states.chapter, _id, !is_liked);
+        setIDCookies("liked_id_list", _id, !is_liked);
         setLiked(!is_liked);
       }}
       className={clsx(
         "cursor-pointer select-none text-center flex flex-col w-[50px] h-[calc-size(auto,size)] flex-none",
-        is_liked && "text-orange-300"
+        is_liked && "text-[var(--primary-yellow)]"
       )}
     >
       <p>Like</p>
       <div className="flex-auto flex">
         <svg
           className={clsx(
-            is_liked ? "fill-orange-300" : "fill-gray-200",
+            is_liked ? "fill-[var(--primary-yellow)]" : "fill-gray-200",
             "m-auto"
           )}
           xmlns="http://www.w3.org/2000/svg"

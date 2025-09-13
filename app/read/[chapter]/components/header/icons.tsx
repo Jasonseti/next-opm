@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { StatesTypes, StatesContext } from "../../state-provider";
 import Image from "next/image";
-import { setChapterCookies } from "../../../../lib/cookies";
+import { setIDCookies } from "../../../../lib/cookies";
 import { incrementFavorite } from "../../../../lib/chapters";
 
 export function UtilityIcons({
@@ -33,12 +33,7 @@ export function UtilityIcons({
       <Icon
         onClick={async () => {
           setBookmarked(!is_bookmarked);
-          await setChapterCookies(
-            "bookmarked_list",
-            chapter,
-            states.chapter_list,
-            !is_bookmarked
-          );
+          await setIDCookies("bookmarked_list", chapter, !is_bookmarked);
           setMessages([
             ...messages,
             !is_bookmarked
@@ -61,12 +56,7 @@ export function UtilityIcons({
         onClick={async () => {
           setFavorited(!is_favorited);
           await incrementFavorite(chapter, !is_favorited);
-          setChapterCookies(
-            "favorited_list",
-            chapter,
-            states.chapter_list,
-            !is_favorited
-          );
+          setIDCookies("favorited_list", chapter, !is_favorited);
           setMessages([
             ...messages,
             !is_favorited

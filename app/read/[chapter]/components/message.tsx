@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { useState, useContext, useEffect, useRef } from "react";
 import { StatesTypes, StatesContext } from "../state-provider";
 
-export function Messages() {
+export default function Messages() {
   const states: StatesTypes = useContext(StatesContext);
 
   return (

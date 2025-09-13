@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HeaderDrawer } from "./header-drawer";
+import { HeaderDrawer, MobileDrawer } from "./header-drawer";
 import { HomeLogo, UtilityIcons } from "./icons";
 import PrevNext from "./prev-next";
 import SettingsTab from "./settings";
@@ -23,32 +23,6 @@ interface HeaderProps {
 }
 
 export default function Header({ props, cookies }: HeaderProps) {
-  // function MobileHeader() {
-  //   return (
-  //     <MobileDrawer>
-  //       <section
-  //         className={clsx(
-  //           "w-[min(60vw,400px)] h-[min(80vh,800px)] border-[1.5px] border-l-0 bg-white rounded-r-[8px]",
-  //           "shadow-[12px_12px_25px_0px_rgba(0,_0,_0,_0.5)] flex flex-col"
-  //         )}
-  //       >
-  //         <main className="mx-auto w-[94%] flex flex-none pt-[2vh] relative">
-  //           <MainDescriptions />
-  //         </main>
-
-  //         <main className="mt-[5%] flex-auto max-h-[45%] mb-[3%]">
-  //           <Summary
-  //             brief_summary={props.brief_summary}
-  //             long_summary={props.long_summary}
-  //           ></Summary>
-  //         </main>
-  //         <main className="h-[80px] flex-none mb-[2vh]">
-  //           <SettingsTab />
-  //         </main>
-  //       </section>
-  //     </MobileDrawer>
-  //   );
-  // }
   return (
     <>
       <HeaderDrawer>
@@ -91,6 +65,21 @@ export default function Header({ props, cookies }: HeaderProps) {
           />
         </section>
       </HeaderDrawer>
+
+      <MobileDrawer>
+        <section className="h-[250px] text-[1.2em]">
+          <MainUtilities props={props} cookies={cookies} />
+        </section>
+        <hr className="relative bottom-[3vw] border-[1.5px]" />
+        <section className="h-[300px] text-[3.3vw]">
+          <Summary
+            brief_summary={props.brief_summary}
+            long_summary={props.long_summary}
+          />
+          <div className="h-[50px]" />
+          <SettingsTab />
+        </section>
+      </MobileDrawer>
     </>
   );
 }

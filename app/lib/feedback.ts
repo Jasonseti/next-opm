@@ -9,7 +9,6 @@ export async function insertFeedback(chapter: string, text: string) {
     await db.insertOne({ chapter: chapter, text: text });
   } catch (e) {
     console.error(e);
-    return [];
   }
 }
 
@@ -21,6 +20,5 @@ export async function insertSubsribe(email: string) {
     await db.insertOne({ email: email });
   } catch (e) {
     console.error(e);
-    return [];
   }
 }

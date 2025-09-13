@@ -1,10 +1,10 @@
-"use server";
 import StateProvider from "./state-provider";
 import Header from "./components/header/header";
+import ChapterNavigator from "./components/chapter-navigator";
 import Book from "./components/book/book";
 import PageNavigator from "./components/page-navigator/page-navigator";
-import CommentSection from "./components/comments/comments";
-import { Messages } from "./components/message";
+import CommentSection from "./components/comment-section/comment-section";
+import Messages from "./components/message";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ChaptersList, fetchChaptersList } from "../../lib/chapters";
@@ -37,51 +37,57 @@ export default async function ReaderPage(props: {
   const page_mode = cookieStore.get("page_mode")?.value;
   const read_mode = cookieStore.get("read_mode")?.value;
   const summary_mode = cookieStore.get("summary_mode")?.value;
-  const bookmarked = getCookie("bookmarked_list")[chapter_index];
-  const favorited = getCookie("favorited_list")[chapter_index];
+  const bookmarked = getCookie("bookmarked_list").includes(chapter);
+  const favorited = getCookie("favorited_list").includes(chapter);
   const liked_id_list = getCookie("liked_id_list") || [];
   const self_comment_id_list = getCookie("self_comment_id_list") || [];
 
   return (
-    <StateProvider
-      props={{
-        chapter: chapter,
-        chapter_list: chapter_list,
-        chapter_index: chapter_index,
-        cover_chapters: cover_chapters,
-        next_chapter_thumbnail: next_chapter_thumbnail,
-      }}
-      cookies={{
-        page_mode: page_mode,
-        read_mode: read_mode,
-        summary_mode: summary_mode,
-      }}
-    >
-      <Header
+    <main className="overflow-hidden">
+      <StateProvider
         props={{
           chapter: chapter,
-          title: title,
-          brief_summary: brief_summary,
-          long_summary: long_summary,
-          thumbnail: images[0],
-          thumbnail_dimension: dimensions[0],
+          chapter_list: chapter_list,
+          chapter_index: chapter_index,
+          cover_chapters: cover_chapters,
+          next_chapter_thumbnail: next_chapter_thumbnail,
+          liked_id_list: liked_id_list,
         }}
         cookies={{
-          favorited: favorited,
-          bookmarked: bookmarked,
+          page_mode: page_mode,
+          read_mode: read_mode,
+          summary_mode: summary_mode,
         }}
-      ></Header>
+      >
+        <Header
+          props={{
+            chapter: chapter,
+            title: title,
+            brief_summary: brief_summary,
+            long_summary: long_summary,
+            thumbnail: images[0],
+            thumbnail_dimension: dimensions[0],
+          }}
+          cookies={{
+            favorited: favorited,
+            bookmarked: bookmarked,
+          }}
+        />
+        <ChapterNavigator
+          chapter_list_data={fetch_results}
+          chapter_index={chapter_index}
+        />
 
-      <Book image_urls={images} image_dimensions={dimensions}></Book>
-      <PageNavigator image_urls={images} image_dimensions={dimensions} />
+        <Book image_urls={images} image_dimensions={dimensions} />
+        <PageNavigator image_urls={images} image_dimensions={dimensions} />
 
-      <CommentSection
-        chapter={chapter}
-        liked_id_list={liked_id_list}
-        self_comment_id_list={self_comment_id_list}
-      />
+        <CommentSection
+          chapter={chapter}
+          self_comment_id_list={self_comment_id_list}
+        />
 
-      <Messages />
-    </StateProvider>
+        <Messages />
+      </StateProvider>
+    </main>
   );
 }

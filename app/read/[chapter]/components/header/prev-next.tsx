@@ -13,7 +13,7 @@ export default function PrevNext() {
   );
 
   return (
-    <div className="flex text-center">
+    <div className="flex text-center text-[0.9em]">
       <button
         onClick={() =>
           router.push("/read/chapter-" + states.chapter_list[chapter_index - 1])

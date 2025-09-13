@@ -8,7 +8,7 @@ export type ChaptersList = {
   thumbnail: string;
 };
 
-export async function fetchChaptersList(query?: string) {
+export async function fetchChaptersList(query = "") {
   try {
     await client.connect();
     const db = client.db("gist-source").collection("chapters");
@@ -16,10 +16,10 @@ export async function fetchChaptersList(query?: string) {
     const chapters = await db
       .find({
         $or: [
-          { chapter: new RegExp(query || "", "i") },
-          { title: new RegExp(query || "", "i") },
-          // { brief_description: new RegExp(query, "i") },
-          // { long_description: new RegExp(query, "i") },
+          { chapter: new RegExp(query, "i") },
+          { title: new RegExp(query, "i") },
+          { brief_summary: new RegExp(query, "i") },
+          { long_summary: new RegExp(query, "i") },
         ],
       })
       .project({ _id: 0, chapter: 1, title: 1, favorite: 1, thumbnail: 1 })
@@ -83,6 +83,5 @@ export async function incrementFavorite(chapter: string, is_add: boolean) {
     );
   } catch (e) {
     console.error(e);
-    return [];
   }
 }
