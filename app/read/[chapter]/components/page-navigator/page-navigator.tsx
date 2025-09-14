@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import Image from "next/image";
+// import Image from "next/image";
 import PageLink from "./page-link";
 import NavDrawer from "./nav-drawer";
 
@@ -25,12 +25,14 @@ export default function PageNavigator({
             "rounded-[4px] border-1 border-black overflow-hidden"
           )}
         >
-          <Image
+          {/* <Image
             width={image_dimensions[i][0]}
             height={image_dimensions[i][1]}
             src={url}
             alt={"page-" + i}
-          />
+          /> */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={url} alt={"page-" + i} className="w-full h-full" />
           <div
             className={clsx(
               "absolute bottom-0 w-full h-[30%] text-[1.2em] text-center font-semibold",

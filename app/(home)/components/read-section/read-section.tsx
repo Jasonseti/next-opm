@@ -133,6 +133,24 @@ async function ChapterList({
 
   return (
     <>
+      {!query && (
+        <div
+          className={clsx(
+            "w-[25vw] md:w-[min(20vw,200px)]",
+            "aspect-[2/3] flex-none relative bg-gray-200",
+            "mx-[min(0.5vw,5px)] first-of-type:ml-0 last-of-type:mr-0",
+            "border-[1.5px] border-gray-600 rounded-[5px] overflow-hidden"
+          )}
+        >
+          <Image
+            fill
+            src="/common_image/coming_soon.png"
+            alt="coming_soon_image"
+            style={{ objectFit: "cover" }}
+            className="scale-[80%]"
+          />
+        </div>
+      )}
       {chapters.map((chapter: ChaptersList, i: number) => (
         <div
           key={i}
@@ -183,7 +201,7 @@ async function ChapterList({
               src="/icon/bookmark_filled.svg"
               alt="bookmark_icon"
               className="scale-x-80 scale-y-110"
-            ></Image>
+            />
           </div>
 
           <div

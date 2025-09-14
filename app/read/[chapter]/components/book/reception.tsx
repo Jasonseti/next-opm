@@ -22,42 +22,63 @@ export default function Reception() {
         `${main_font.className} font-semibold text-[1.5em]`
       )}
     >
-      <div
-        onClick={() =>
-          router.push(
-            "/read/chapter-" + states.chapter_list[states.chapter_index + 1]
-          )
-        }
-        className={clsx(
-          "relative w-full h-[50%] mx-auto flex flex-col py-[10%]",
-          "cursor-pointer group"
-        )}
-      >
+      {states.next_chapter_thumbnail ? (
         <div
+          onClick={() =>
+            router.push(
+              "/read/chapter-" + states.chapter_list[states.chapter_index + 1]
+            )
+          }
           className={clsx(
-            "w-full h-full absolute top-0 bg-red-600/40",
-            "mask-b-from-50% mask-b-to-100% rounded-[min(2vw,20px)]",
-            "group-hover:bg-red-600/50 trasition duration-100"
+            "relative w-full h-[50%] mx-auto flex flex-col py-[10%]",
+            "cursor-pointer group"
           )}
-        ></div>
-        <button
-          className={clsx(
-            "w-[85%] flex-none mx-auto cursor-pointer z-10 rounded-[min(0.5vw,5px)]",
-            "border-[3px] border-amber-400 text-amber-200"
-          )}
-        >{`Go to Chapter ${
-          states.chapter_list[states.chapter_index + 1]
-        }`}</button>
-        <div className="h-[5%]" />
-        <div className="relative flex-auto w-full mx-auto">
-          <Image
-            fill
-            src={states.next_chapter_thumbnail}
-            alt="next_chapter_thumbnail"
-            style={{ objectFit: "contain" }}
-          />
+        >
+          <div
+            className={clsx(
+              "w-full h-full absolute top-0 bg-red-600/40",
+              "mask-b-from-50% mask-b-to-100% rounded-[min(2vw,20px)]",
+              "group-hover:bg-red-600/50 trasition duration-100"
+            )}
+          ></div>
+          <button
+            className={clsx(
+              "w-[85%] flex-none mx-auto cursor-pointer z-10 rounded-[min(0.5vw,5px)]",
+              "border-[3px] border-amber-400 text-amber-200"
+            )}
+          >{`Go to Chapter ${
+            states.chapter_list[states.chapter_index + 1]
+          }`}</button>
+          <div className="h-[5%]" />
+          <div className="relative flex-auto w-full mx-auto">
+            <Image
+              fill
+              src={states.next_chapter_thumbnail}
+              alt="next_chapter_thumbnail"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-full relative h-[50%] flex">
+          <div
+            className={clsx(
+              "w-full h-full absolute top-0 bg-red-600/40",
+              "mask-b-from-50% mask-b-to-100% rounded-[min(2vw,20px)]",
+              "group-hover:bg-red-600/50 trasition duration-100"
+            )}
+          ></div>
+          <div className="relative flex-auto w-full mx-auto overflow-hidden">
+            <Image
+              fill
+              src="/common_image/coming_soon.png"
+              alt="next_chapter_thumbnail"
+              style={{ objectFit: "cover" }}
+              className="scale-[110%]"
+            />
+          </div>
+        </div>
+      )}
 
       <div className="text-[0.8em] mt-[10%]">
         <div className="w-[80%] mx-auto bg-gray-100 text-center rounded-[100px] mb-[0.5em]">

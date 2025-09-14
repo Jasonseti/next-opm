@@ -10,6 +10,16 @@ import { redirect } from "next/navigation";
 import { ChaptersList, fetchChaptersList } from "../../lib/chapters";
 import { fetchChapterData } from "../../lib/chapters";
 
+export async function generateMetadata(props: {
+  params: Promise<{ chapter: string }>;
+}) {
+  const chapter = (await props.params)["chapter"].slice(8);
+  return {
+    title: "OPM-PDF | Chapter - " + chapter,
+    description: "Read One Punch Man Online Chapter " + chapter,
+  };
+}
+
 export default async function ReaderPage(props: {
   params: Promise<{ chapter: string }>;
 }) {
@@ -24,7 +34,7 @@ export default async function ReaderPage(props: {
   const chapter_index = chapter_list.findIndex(
     (chp: string) => chp === chapter
   );
-  const next_chapter_thumbnail = fetch_results[chapter_index + 1].thumbnail;
+  const next_chapter_thumbnail = fetch_results[chapter_index + 1]?.thumbnail;
 
   if (!chapter_list.includes(chapter)) redirect("/read/chapter-not-found");
   const { title, brief_summary, long_summary, images, dimensions } =

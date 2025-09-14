@@ -46,7 +46,7 @@ export default function ChapterNavigator({
           ? "mask-b-from-80% mask-b-to-100%"
           : "mask-b-from-40% mask-b-to-100% pb-[2em]",
         "transition-all duration-100",
-        `${main_font.className} text-[0.95em] font-medium text-gray-300`
+        `${main_font.className} xl:text-[1.1em] text-[0.95em] font-medium text-gray-300`
       )}
     >
       <div
