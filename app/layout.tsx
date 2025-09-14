@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "One Punch Man PDF",
   description:
     "Read One Punch Man Online. Download One Punch Man in PDF Format. Get One Punch Man Source Files.",
+  openGraph: {
+    images: "/opengraph-image.png",
+  },
 };
 
 export default async function RootLayout({

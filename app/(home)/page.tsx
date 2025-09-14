@@ -20,7 +20,6 @@ export default async function HomePage(props: {
   const bookmark_list = JSON.parse(
     cookieStore.get("bookmarked_list")?.value || "[]"
   );
-  console.log(bookmark_list);
 
   return (
     <main className="overflow-hidden text-[2vw] sm:text-[1.5vw] lg:text-[min(1.2vw,12px)]">
